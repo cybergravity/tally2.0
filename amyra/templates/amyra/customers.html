@@ -27,7 +27,7 @@
                     <div class="card-content">
                         <div class="card-body card-dashboard">
                             <div class="table-responsive">
-                            <button data-toggle="modal" data-target="#addRowModal">Add Customer</button>
+                            <button data-toggle="modal" data-target="#addRowModal" class="btn btn-primary" style="float: right;">Add Customer</button>
                             <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -51,7 +51,15 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group form-group-default">
                                                             <label>Name</label>
-                                                            <input id="addName" type="text" class="form-control" placeholder="fill name" name="customer">
+                                                    <select class="select2 form-control select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                                        <option value="square" data-select2-id="3">Square</option>
+                                                        <option value="rectangle" data-select2-id="122">Rectangle</option>
+                                                        <option value="rombo" data-select2-id="123">Rombo</option>
+                                                        <option value="romboid" data-select2-id="124">Romboid</option>
+                                                        <option value="trapeze" data-select2-id="125">Trapeze</option>
+                                                        <option value="traible" data-select2-id="126">Triangle</option>
+                                                        <option value="polygon" data-select2-id="127">Polygon</option>
+                                                    </select><span class="select2 select2-container select2-container--default select2-container--below select2-container--focus" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-4k45-container"><span class="select2-selection__rendered" id="select2-4k45-container" role="textbox" aria-readonly="true" title="Square">Square</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 pr-0">
