@@ -1,219 +1,480 @@
-{% extends 'base.html' %} {% block content %} 
+{% extends 'base.html' %} {% block content %}
 <div class="content-header row">
-    <div class="content-header-left col-12 mb-2 mt-1">
-        <div class="row breadcrumbs-top">
-            <div class="col-12">
-                <h5 class="content-header-title float-left pr-1 mb-0">DataTables</h5>
-                <div class="breadcrumb-wrapper col-12">
-                    <ol class="breadcrumb p-0 mb-0">
-                        <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a>
-                        </li>
-                        <li class="breadcrumb-item active">Datatable
-                        </li>
-                    </ol>
-                </div>
-            </div>
+  <div class="content-header-left col-12 mb-2 mt-1">
+    <div class="row breadcrumbs-top">
+      <div class="col-12">
+        <h5 class="content-header-title float-left pr-1 mb-0">DataTables</h5>
+        <div class="breadcrumb-wrapper col-12">
+          <ol class="breadcrumb p-0 mb-0">
+            <li class="breadcrumb-item">
+              <a href="index.html"><i class="bx bx-home-alt"></i></a>
+            </li>
+            <li class="breadcrumb-item active">Datatable</li>
+          </ol>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <div class="content-body">
-    <section id="column-selectors">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Customers</h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body card-dashboard">
-                            <div class="table-responsive">
-                            <button data-toggle="modal" data-target="#addRowModal" class="btn btn-primary" style="float: right;">Add Customer</button>
-                            <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header no-bd">
-                                            <h5 class="modal-title">
-                                                <span class="fw-mediumbold">
-                                                New</span>
-                                                <span class="fw-light">
-                                                    Row
-                                                </span>
-                                            </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="small">Create a new row using this form, make sure you fill them all</p>
-                                            <form method="POST" action="{% url 'amyra:add_customer' %}">
-                                                {% csrf_token %}
-                                                <div class="row">
-                                                    <div class="col-md-12 pr-0">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Name</label>
-                                                            <input id="addAddress" type="text"  class="form-control" placeholder="fill name" name="customer" width='350' style="word-wrap:break-word; table-layout:fixed;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 pr-0">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Address</label>
-                                                            <input id="addAddress" type="text"  class="form-control" placeholder="fill address" name="address" width='350' style="word-wrap:break-word; table-layout:fixed;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Mobile No</label>
-                                                            <input id="addMobile" type="number" class="form-control" placeholder="fill mobile" name="mobile" style="word-wrap:break-word; table-layout:fixed;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group form-group-default">
-                                                            <label>City</label>
-                                                            <input id="addCity" type="text" class="form-control" placeholder="fill city" name="city">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group form-group-default">
-                                                            <label>State </label>
-                                                            <input id="addState" type="text" class="form-control" placeholder="fill state" name="state">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group form-group-default">
-                                                            <label>GST No</label>
-                                                            <input id="addGst" type="text" class="form-control" placeholder="fill gst" name="gst">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer no-bd">
-                                                    <button type="submit" id="addRowButton" class="btn btn-primary">Add</button>
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+  <section id="column-selectors">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Customers</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body card-dashboard">
+              <div class="table-responsive">
+                <button
+                  data-toggle="modal"
+                  data-target="#addRowModal"
+                  class="btn btn-primary"
+                  style="float: right"
+                >
+                  Add Customer
+                </button>
+                <div
+                  class="modal fade"
+                  id="addRowModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header no-bd">
+                        <h5 class="modal-title">
+                          <span class="fw-mediumbold"> New</span>
+                          <span class="fw-light"> Row </span>
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p class="small">
+                          Create a new row using this form, make sure you fill
+                          them all
+                        </p>
+                        <form
+                          method="POST"
+                          action="{% url 'amyra:add_customer' %}"
+                        >
+                          {% csrf_token %}
+                          <div class="row">
+                            <div class="col-md-12 pr-0">
+                              <div class="form-group form-group-default">
+                                <label>Name</label>
+                                <input
+                                  id="addAddress"
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="fill name"
+                                  name="customer"
+                                  width="350"
+                                  style="
+                                    word-wrap: break-word;
+                                    table-layout: fixed;
+                                  "
+                                />
+                              </div>
                             </div>
-                                <table class="table table-striped dataex-html5-selectors">
-                                    <thead>
-                                        <tr>
-                                            <th class="sorting_asc">Name</th>
-                                            <th class="sorting">Address</th>
-                                            <th class="sorting">Mobile</th>
-                                            <th class="sorting">City</th>
-                                            <th class="sorting">State</th>
-                                            <th class="sorting">GST No</th>
-                                            <th class="sorting_disabled">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for customer in customers %}
-                                            <tr>
-                                                <td>{{ customer }}</td>
-                                                <td>{{ customer.address}}</td>
-                                                <td>{{ customer.mobile_no }}</td>
-                                                <td>{{ customer.city }}</td>
-                                                <td>{{ customer.state}}</td>
-                                                <td>{{ customer.gst_no }}</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editRowModal"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                            <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header no-bd">
-                                                                            <h5 class="modal-title">
-                                                                                <span class="fw-mediumbold">
-                                                                                New</span>
-                                                                                <span class="fw-light">
-                                                                                    Row
-                                                                                </span>
-                                                                            </h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <p class="small">Create a new row using this form, make sure you fill them all</p>
-                                                                            <form method="POST" action="{% url 'amyra:add_customer' %}">
-                                                                                {% csrf_token %}
-                                                                                <div class="row">
-                                                                                    <div class="col-md-12 pr-0">
-                                                                                        <div class="form-group form-group-default">
-                                                                                            <label>Name</label>
-                                                                                            <input id="addAddress" type="text"  class="form-control" placeholder="fill name" name="customer" width='350' style="word-wrap:break-word; table-layout:fixed;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 pr-0">
-                                                                                        <div class="form-group form-group-default">
-                                                                                            <label>Address</label>
-                                                                                            <input id="addAddress" type="text"  class="form-control" placeholder="fill address" name="address" width='350' style="word-wrap:break-word; table-layout:fixed;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="form-group form-group-default">
-                                                                                            <label>Mobile No</label>
-                                                                                            <input id="addMobile" type="number" class="form-control" placeholder="fill mobile" name="mobile" style="word-wrap:break-word; table-layout:fixed;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="form-group form-group-default">
-                                                                                            <label>City</label>
-                                                                                            <input id="addCity" type="text" class="form-control" placeholder="fill city" name="city">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="form-group form-group-default">
-                                                                                            <label>State </label>
-                                                                                            <input id="addState" type="text" class="form-control" placeholder="fill state" name="state">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="form-group form-group-default">
-                                                                                            <label>GST No</label>
-                                                                                            <input id="addGst" type="text" class="form-control" placeholder="fill gst" name="gst">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="modal-footer no-bd">
-                                                                                    <button type="submit" id="addRowButton" class="btn btn-primary">Add</button>
-                                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th>Mobile</th>
-                                            <th>City</th>
-                                            <th>State</th>
-                                            <th>GST No</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                            <div class="col-md-6 pr-0">
+                              <div class="form-group form-group-default">
+                                <label>Address</label>
+                                <input
+                                  id="addAddress"
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="fill address"
+                                  name="address"
+                                  width="350"
+                                  style="
+                                    word-wrap: break-word;
+                                    table-layout: fixed;
+                                  "
+                                />
+                              </div>
                             </div>
-                        </div>
+                            <div class="col-md-6">
+                              <div class="form-group form-group-default">
+                                <label>Mobile No</label>
+                                <input
+                                  id="addMobile"
+                                  type="number"
+                                  class="form-control"
+                                  placeholder="fill mobile"
+                                  name="mobile"
+                                  style="
+                                    word-wrap: break-word;
+                                    table-layout: fixed;
+                                  "
+                                />
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group form-group-default">
+                                <label>City</label>
+                                <input
+                                  id="addCity"
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="fill city"
+                                  name="city"
+                                />
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group form-group-default">
+                                <label>State </label>
+                                <input
+                                  id="addState"
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="fill state"
+                                  name="state"
+                                />
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group form-group-default">
+                                <label>GST No</label>
+                                <input
+                                  id="addGst"
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="fill gst"
+                                  name="gst"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer no-bd">
+                            <button
+                              type="submit"
+                              id="addRowButton"
+                              class="btn btn-primary"
+                            >
+                              Add
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
+                  </div>
                 </div>
+                <table class="table table-striped dataex-html5-selectors">
+                  <thead>
+                    <tr>
+                      <th class="sorting_asc">Name</th>
+                      <th class="sorting">Address</th>
+                      <th class="sorting">Mobile</th>
+                      <th class="sorting">City</th>
+                      <th class="sorting">State</th>
+                      <th class="sorting">GST No</th>
+                      <th class="sorting_disabled">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                      <td>{{ customer }}</td>
+                      <td>{{ customer.address}}</td>
+                      <td>{{ customer.mobile_no }}</td>
+                      <td>{{ customer.city }}</td>
+                      <td>{{ customer.state}}</td>
+                      <td>{{ customer.gst_no }}</td>
+                      <td>
+                        <div class="dropdown">
+                          <div
+                            class="modal fade"
+                            id="editRowModal"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                  <h5 class="modal-title">
+                                    <span class="fw-mediumbold"> Edit</span>
+                                    <span class="fw-light"> Customer </span>
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p class="small">
+                                    Edit the part of customer that you need be
+                                    sure not to remove those data.
+                                  </p>
+                                  <form
+                                    method="POST"
+                                    action="{% url 'amyra:edit_customer' %}"
+                                  >
+                                    {% csrf_token %}
+                                    <div class="row">
+                                      <div class="col-md-12 pr-0">
+                                        <div
+                                          class="form-group form-group-default"
+                                        >
+                                          <label>Name</label>
+                                          <input
+                                            id="addAddress"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="fill name"
+                                            name="customer"
+                                            value="{{ customer.name }}"
+                                            width="350"
+                                            style="
+                                              word-wrap: break-word;
+                                              table-layout: fixed;
+                                            "
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6 pr-0">
+                                        <div
+                                          class="form-group form-group-default"
+                                        >
+                                          <label>Address</label>
+                                          <input
+                                            id="addAddress"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="fill address"
+                                            value="{{ customer.address }}"
+                                            name="address"
+                                            width="350"
+                                            style="
+                                              word-wrap: break-word;
+                                              table-layout: fixed;
+                                            "
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div
+                                          class="form-group form-group-default"
+                                        >
+                                          <label>Mobile No</label>
+                                          <input
+                                            id="addMobile"
+                                            type="number"
+                                            class="form-control"
+                                            value="{{ customer.mobile_no }}"
+                                            placeholder="fill mobile"
+                                            name="mobile"
+                                            style="
+                                              word-wrap: break-word;
+                                              table-layout: fixed;
+                                            "
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div
+                                          class="form-group form-group-default"
+                                        >
+                                          <label>City</label>
+                                          <input
+                                            id="addCity"
+                                            type="text"
+                                            value="{{ customer.city }}"
+                                            class="form-control"
+                                            placeholder="fill city"
+                                            name="city"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div
+                                          class="form-group form-group-default"
+                                        >
+                                          <label>State </label>
+                                          <input
+                                            id="addState"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="fill state"
+                                            name="state"
+                                            value="{{ customer.state }}"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div
+                                          class="form-group form-group-default"
+                                        >
+                                          <label>GST No</label>
+                                          <input
+                                            id="addGst"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="fill gst"
+                                            name="gst"
+                                            value="{{ customer.gst_no }}"
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <input
+                                      type="hidden"
+                                      value="{{ customer.id }}"
+                                      name="id"
+                                    />
+                                    <div class="modal-footer no-bd">
+                                      <button
+                                        type="submit"
+                                        id="addRowButton"
+                                        class="btn btn-primary"
+                                      >
+                                        Update
+                                      </button>
+                                      <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                        data-dismiss="modal"
+                                      >
+                                        Close
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="modal fade"
+                            id="deleteCustomer"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                  <h5 class="modal-title">
+                                    <span class="fw-mediumbold"> Delete</span>
+                                    <span class="fw-light"> Customer </span>
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p class="small">
+                                    Note that Deleting the customer is permanent
+                                    and you won't be able to recover it.
+                                  </p>
+                                  <form
+                                    method="POST"
+                                    action="{% url 'amyra:remove_customer' %}"
+                                  >
+                                    {% csrf_token %}
+
+                                    <input
+                                      type="hidden"
+                                      value="{{ customer.id }}"
+                                      name="id"
+                                    />
+                                    <div class="modal-footer no-bd">
+                                      <button
+                                        type="submit"
+                                        id="addRowButton"
+                                        class="btn btn-primary"
+                                      >
+                                        Delete
+                                      </button>
+                                      <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                        data-dismiss="modal"
+                                      >
+                                        Close
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <span
+                            class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            role="menu"
+                          ></span>
+                          <div class="dropdown-menu dropdown-menu-right">
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              data-toggle="modal"
+                              data-target="#editRowModal"
+                              ><i class="bx bx-edit-alt mr-1"></i> edit</a
+                            >
+
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              data-toggle="modal"
+                              data-target="#deleteCustomer"
+                              ><i class="bx bx-trash mr-1"></i> delete</a
+                            >
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>Mobile</th>
+                      <th>City</th>
+                      <th>State</th>
+                      <th>GST No</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </div>
 
 {% endblock %}
