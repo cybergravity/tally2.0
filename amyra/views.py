@@ -15,8 +15,7 @@ def customers(request):
 
 def add_customer(request):
     if request.method == "POST":
-        customer_id = request.POST['customer']
-        customer = User.objects.get(pk=customer_id)
+        customer = request.POST['customer']
         address = request.POST['address']
         mobile = request.POST['mobile']
         city = request.POST['city']
@@ -44,6 +43,7 @@ def edit_customer(request):
     if request.method == "POST":
         customer_id = request.POST['id']
         customer = Customer.objects.get(pk=customer_id)
+        customer.name = request.POST['customer']
         customer.address = request.POST['address']
         customer.mobile_no = request.POST['mobile']
         customer.city = request.POST['city']

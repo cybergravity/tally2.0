@@ -29,13 +29,14 @@ class DestinationAdmin(admin.ModelAdmin):
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'address', 'mobile_no', 'state', 'gst_no')
-    list_filter = ('state',)
-    search_fields = ('__str__',)
+    list_display = ('name', 'last_modified', 'created')
+    list_filter = ('created',)
+    search_fields = ('name',)
+
     fieldsets = (
         (None, {
 
-            'fields': ('user', 'address', 'mobile_no', ('city', 'state'), 'gst_no')
+            'fields': ('name', 'address', 'mobile_no', ('city', 'state'), 'gst_no')
 
         }),
     )

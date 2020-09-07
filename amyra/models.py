@@ -3,15 +3,20 @@ from django.db import models
 
 
 class Customer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    address = models.CharField(max_length=100)
-    mobile_no = models.BigIntegerField()
-    city = models.CharField(max_length=12)
-    state = models.CharField(max_length=15)
-    gst_no = models.CharField(max_length=20)
+    name = models.CharField(max_length=50, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+    mobile_no = models.IntegerField()
+    city = models.CharField(max_length=12, null=True, blank=True)
+    state = models.CharField(max_length=15, null=True, blank=True)
+    gst_no = models.CharField(max_length=20, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    last_modified = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return self.user.get_full_name()
+        return self.name
+
+    class Meta:
+        ordering = ('-created',)
 
 
 class Destination(models.Model):
